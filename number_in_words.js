@@ -16,6 +16,14 @@ function numberToWords(number) {
   } else if(number < 2000){
     convert += 'Seribu '
     return convert + numberToWords(number % 1000)
+  } else if(number < 1000000){
+    return numberToWords(Math.floor(number / 1000)) + ' ribu ' + numberToWords(number % 1000)
+  } else if(number < 10000000){
+    return numberToWords(Math.floor(number / 1000000)) + ' juta ' + numberToWords(number % 1000000)
+  } else if(number < 100000000){
+    return numberToWords(Math.floor(number / 10000000)) + ' miliar ' + numberToWords(number % 10000000)
+  } else if(number < 1000000000){
+    return numberToWords(Math.floor(number / 100000000)) + ' triliun ' + numberToWords(number % 100000000)
   }
 }
 

@@ -4,6 +4,7 @@ function numberToWords(number) {
 
   var result = ''
 
+
   if (number < 12) {
     
     result += angka[number]
@@ -41,23 +42,3 @@ console.log(numberToWords(1000000));
 console.log(numberToWords(2011845));
 
 console.log(numberToWords(999999999999));
-
-
-
-
-
-/*
-
-  
-  else if(satuan<1000000000) 
-21
-   hasil=hasil+angka(satuan/1000000)+" Juta "+angka(satuan%1000000);
-22
-  else if(satuan>=1000000000) 
-23
-   hasil="Angka terlalu besar, harus kurang dari 1 milyar!";
-24
-  return hasil; 
-
-
-*/

@@ -1,28 +1,24 @@
 function numberToWords(number) {
   // Your code here
-  var angka = [1,2,3,4,5,6,7,8,9,0]
-  var namaangka = ['satu','dua','tiga','empat','lima','enam','tujuh','delapan','sembilan','nol']
-  
-
-  var hasil = []
-  var numberString = String(number)
-  for(var j = 0; j < numberString.length; j++){
-    for(var i = 0; i < angka.length; i++){
-      
-      if(Number(numberString[j]) === angka[i]){
-          hasil += namaangka[i] +' '
-      }
+  var satuan = ['','satu','dua','tiga','empat','lima','enam','tujuh','delapan','sembilan']
+  var belasan = ['','sebelas','dua belas','tigas belas','empat belas','lima belas','genep belas','tujuh belas','delapan belas','sembilan belas']
+    num = number
+    if(num === 0){
+        return ''
+    } else if(num >= 100){
+        return satuan[Math.floor(num/100)]+' ratus '+satuan[Math.floor(num%100)]
+    } else if(num >= 20){
+        return satuan[Math.floor(num/10)]+' puluh '+satuan[num%10]
+    } else if(num >= 10 && num < 20){
+        return belasan[num- 10]
+    } else if(num < 10){
+        return satuan[num]
     }
-  }
-  
 
-return hasil
-  
-  
- 
 }
 
 // Driver code
+
 console.log(numberToWords(705));
-// console.log(numberToWords(1000000));
+console.log(numberToWords(1000000));
 // console.log(numberToWords(2011845));

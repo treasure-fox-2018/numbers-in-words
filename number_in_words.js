@@ -1,52 +1,43 @@
 function numberToWords(number) {
   // Your code here
-    var kelipatanSeribu = ['','Ribu','Juta', 'Miliar','Triliun'];
-    var angkaSatuan = ['Nol','Satu','Dua','Tiga','Empat', 'Lima','Enam','Tujuh','Delapan','Sembilan'];
-    var angkaBelasan = ['Sepuluh','Sebelah','Dua Belas','Tiga Belas', 'Empat Belas','Lima Belas','Enam Belas', 'Tujuh Belas','Delapan Belas','Sembilan Belas'];
-    var angkaPuluhan = ['Duapuluh','Tiga Puluh','Empat Puluh','Lima Puluh', 'Enam Puluh','Tujuh Puluh','Delapan Puluh','Sembilan Puluh'];
-      number = number.toString();
-      number = number.replace(/[\, ]/g,'');
-      if (number != parseFloat(number)) return 'not a number';
-      var panjangAngka = number.indexOf('.');
-      if (panjangAngka == -1)
-          panjangAngka  = number.length;
-      if (panjangAngka  > 15)
-          return 'Terlalu Besar';
-      var angkaSplit = number.split('');
-      var wordAngka = '';
-      var tmp = 0;
-      for (var i = 0;   i < panjangAngka;  i++) {
-          if ((panjangAngka - i) % 3 == 2) {
-              if (angkaSplit[i] == '1') {
-                  wordAngka += angkaBelasan[Number(angkaSplit[i + 1])] + ' ';
-                  i++;
-                  tmp = 1;
-              } else if (angkaSplit[i] != 0) {
-                  wordAngka += angkaPuluhan[angkaSplit[i] - 2] + ' ';
-                  tmp = 1;
-              }
-          } else if (angkaSplit[i] != 0) {
-              wordAngka += angkaSatuan[angkaSplit[i]] +' ';
-              if ((panjangAngka - i) % 3 == 0) wordAngka += 'Ratus ';
-              tmp = 1;
-          }
-          if ((panjangAngka - i) % 3 == 1) {
-              if (tmp)
-                  wordAngka += kelipatanSeribu[(panjangAngka-i-1)/3] + ' ';
-              tmp =0;
-          }
-      }
+  let bilanganAngka = ["", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas", "Seratus ", "Seribu "]
+  let satuan = [" Belas ", " Puluh ", " Ratus ", " Ribu "," Juta ", " Miliar ", " Triliun "]
 
-      if (panjangAngka != number.length) {
-          var panjangAngkaBeda = number.length;
-          wordAngka += 'point ';
-          for (var i = panjangAngka + 1; i < panjangAngkaBeda; i++)
-              wordAngka += angkaSatuan[angkaSplit[i]] +' ';
-      }
-      return wordAngka.replace(/\number+/g,' ');
+  if(number < 12){
+    return bilanganAngka[number]
+  }else if (number < 20) {
+    return bilanganAngka[number % 10] + satuan[0]
+  }else if (number < 100) {
+    return bilanganAngka[Math.floor(number/10)] + satuan[1] + bilanganAngka[number % 10]
+  }else if (number < 200) {
+    return bilanganAngka[12] + numberToWords(number-100)
+  }else if (number < 1000) {
+    return bilanganAngka[Math.floor(number/100)] + satuan[2] + numberToWords(number % 100)
+  }else if (number < 2000) {
+    return bilanganAngka[13] + numberToWords(number-1000)
+  }else if (number < 10000) {
+    return bilanganAngka[Math.floor(number/1000)] + satuan[3] + numberToWords(number % 1000)
+  }else if (number < 1000000) {
+    return numberToWords(Math.floor(number/1000))+satuan[3]+numberToWords(Math.floor(number%1000))
+  }else if (number < 1000000000) {
+    return numberToWords(Math.floor(number/1000000))+satuan[4]+ numberToWords(number%1000000)
+  }
 }
 
 // Driver code
+// console.log(numberToWords(9));
+// console.log(numberToWords(19));
+// console.log(numberToWords(99))
+// console.log(numberToWords(199));
+// console.log(numberToWords(999));
+// console.log(numberToWords(1999));
+// console.log(numberToWords(9999));
+// console.log(numberToWords(19999));
+// console.log(numberToWords(99999));
+// console.log(numberToWords(199999));
+// console.log(numberToWords(999999));
+// console.log(numberToWords(1999999));
+// console.log(numberToWords(9999999));
 console.log(numberToWords(705));
 console.log(numberToWords(1000000));
 console.log(numberToWords(2011845));
